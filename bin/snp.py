@@ -77,7 +77,7 @@ def Compare_SNP(libdic,gold):
             fn+=1
     print("SNP:")
     print("\tOverlap",overlap,"\n\tFP",fp,"\n\tFN",fn)
-    print("\tTotal gold:",len(gold),"\n\tTotal Aquila:",len(libdic))
+    print("\tTotal gold:",len(gold),"\n\tTotal input vcf:",len(libdic))
     print("\tPrecision(overlap/aquila)",overlap/(overlap+fp))
     print("\tRecall(sensitivity,overlap/gold)",overlap/len(gold))
     print("----------------------------------")
