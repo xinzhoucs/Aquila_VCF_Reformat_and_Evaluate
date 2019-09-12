@@ -31,7 +31,7 @@ SNP:
         FP 102492
         FN 32558
         Total gold: 3045094
-        Total Aquila: 3115028
+        Total input vcf: 3115028
         Precision(overlap/aquila) 0.9670975670202644
         Recall(sensitivity,overlap/gold) 0.9893080476333407
 ----------------------------------
@@ -49,7 +49,7 @@ INDEL:
         FP 28148
         FN 31278
         Total gold: 531382
-        Total Aquila: 528252
+        Total input vcf: 528252
         Precision(overlap/Aquila) 0.9467148254999508
         Recall(sensitivity,overlap/gold): 0.9411383900847224
 ----------------------------------
