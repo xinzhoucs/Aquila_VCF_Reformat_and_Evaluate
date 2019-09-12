@@ -1,8 +1,14 @@
 # Vcf Reformat and Evaluate
 ## Reformat:
-Reformat script modify the REF field and ALT field as follows:
+Reformat script modify the REF field, ALT field and POS field as follows:
 ```
+For INDEL:
+acg     -    =>     TACG        T
+                      ^         ^
+               lower to upper   add one reference base
 
+For SNP:
+lower to upper and POS add 1 (Coordinate change from 0 to 1)
 ```
 ### Example:
 ```
@@ -32,12 +38,12 @@ SNP:
         FN 32558
         Total gold: 3045094
         Total input vcf: 3115028
-        Precision(overlap/aquila) 0.9670975670202644
+        Precision(overlap/input_vcf) 0.9670975670202644
         Recall(sensitivity,overlap/gold) 0.9893080476333407
 ----------------------------------
         GenoType correct: 3007594
-        Hetero(Gold) -> Homo (Aquila): 3865
-        Homo(Gold) -> Hetero (Aquila): 1077
+        Hetero(Gold) -> Homo (input_vcf): 3865
+        Homo(Gold) -> Hetero (input_vcf): 1077
         Total GenoType change: 4942
         GenoType error rate: 0.001640478321254916
 --------------------------------------------------------------------------
@@ -50,12 +56,12 @@ INDEL:
         FN 31278
         Total gold: 531382
         Total input vcf: 528252
-        Precision(overlap/Aquila) 0.9467148254999508
+        Precision(overlap/input_vcf) 0.9467148254999508
         Recall(sensitivity,overlap/gold): 0.9411383900847224
 ----------------------------------
         GenoType correct: 490361
-        Hetero(Gold) -> Homo (Aquila): 3256
-        Homo(Gold) -> Hetero (Aquila): 6487
+        Hetero(Gold) -> Homo (input_vcf): 3256
+        Homo(Gold) -> Hetero (input_vcf): 6487
         Total GenoType change: 9743
         GenoType error rate: 0.019481947754866988
 ----------------------------------
@@ -67,5 +73,5 @@ INDEL:
 
 INDEL evaluation finished
 All Done!
-Total time: 82.13158583641052
+Total time: 82.49052119255066
 ```
