@@ -144,7 +144,7 @@ def Compare_INDEL(libdic,gold,gold_complex):
             time_data[value] = 1
     print("INDEL:")
     print("\tOverlap",overlap,"\n\tFP",fp,"\n\tFN",fn)
-    print("\tTotal gold:",len(gold)+len(split_comp),"\n\tTotal Aquila:",len(libdic))
+    print("\tTotal gold:",len(gold)+len(split_comp),"\n\tTotal input vcf:",len(libdic))
     print("\tPrecision(overlap/Aquila)",overlap/(overlap+fp))
     print("\tRecall(sensitivity,overlap/gold):",overlap/(len(gold)+len(split_comp)))
     print("----------------------------------")
