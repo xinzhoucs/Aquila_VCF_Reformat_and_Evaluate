@@ -8,7 +8,7 @@ acg     -    =>     TACG        T
                lower to upper   add one reference base
 
 For SNP:
-lower to upper and POS add 1 (Coordinate change from 0 to 1)
+lower to upper and POS+1 (Coordinate changes from 0 to 1)
 ```
 ### Example:
 ```
