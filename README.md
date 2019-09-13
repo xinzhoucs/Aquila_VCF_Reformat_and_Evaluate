@@ -2,13 +2,17 @@
 ## Reformat:
 Reformat script modify the REF field, ALT field and POS field as follows:
 ```
+Coordinate changes from 0 to 1
+
 For INDEL:
 acg     -    =>     TACG        T
                       ^         ^
                lower to upper   add one reference base
 
+POS not changed (+1-1=0)
+
 For SNP:
-lower to upper and POS+1 (Coordinate changes from 0 to 1)
+lower to upper and POS+1
 ```
 ### Example:
 ```
@@ -16,7 +20,7 @@ python Reformat.py -r ../source/genome.fa -i ../source/Aquila_final_sorted.vcf -
 ```
 ### *Required parameters
 #### --ref_fa REF_FA, -r REF_FA : Reference fasta file for reformat
-#### --in_vcf IN_VCF, -i IN_VCF : Original vcf file
+#### --in_vcf IN_VCF, -i IN_VCF : Original vcf file from Aquila
 #### --out_vcf OUT_VCF, -o OUT_VCF : Output reformated vcf file
 
 ## Evaluate:
