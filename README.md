@@ -2,7 +2,7 @@
 ## Reformat:
 Reformat script modify the REF field, ALT field and POS field as follows:
 ```
-Coordinate changes from 0 to 1
+Changes from base 1 to base 0
 
 For INDEL:
 acg     -    =>     TACG        T
