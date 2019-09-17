@@ -1,10 +1,14 @@
 from argparse import ArgumentParser
 import time
+import os
 
 parser = ArgumentParser(description="Author: xzhou15@cs.stanford.edu\n liuyichen@std.uestc.edu.cn\n",usage='use "python3 %(prog)s --help" for more information')
 parser.add_argument('--ref_fa','-r',help="Reference fasta file for reformat",required=True)
 parser.add_argument('--in_vcf','-i',help="Original vcf file",required=True)
 parser.add_argument('--out_vcf','-o',help="Output reformated vcf file",required=True)
+parser.add_argument('--add_header','-head',help="Add header to vcf (38,19 or none)",default="none")
+parser.add_argument('--add_chr','-ac',help="Add 'chr' to CHROM field (1->chr1)",action="store_true")
+parser.add_argument('--gz_tbi','-gt',help="Output gz and tbi file",action="store_true")
 args = parser.parse_args()
 
 
@@ -25,7 +29,7 @@ def GetGenoSeq (fafile):
         chro = []
     return genome
     
-def modify(vcf_file,genome,vcfwrite):
+def modify(vcf_file,genome,vcfwrite,add_chr,add_header):
     chrom_list = ['chr1','chr2','chr3','chr4','chr5',
                   'chr6','chr7','chr8','chr9','chr10',
                   'chr11','chr12','chr13','chr14','chr15',
@@ -33,12 +37,18 @@ def modify(vcf_file,genome,vcfwrite):
                   'chr21','chr22','chrX']
     with open (vcf_file, "r") as f:
         with open (vcfwrite,"w") as fw:
+            if add_header != "none":
+                with open("../src/header"+add_header,"r") as fh:
+                    for line in fh:
+                        fw.write(line)
             for line in f:
                 if line[0] == '#':
                     fw.write(line)
                 else:
                     line = line.split('\t')
                     POS = int(line[1])
+                    if add_chr:
+                        line[0] = "chr" + line[0]
                     CHROM = line[0]
                     INFO = line[7]
                     line[3] = line[3].upper()
@@ -58,13 +68,26 @@ def modify(vcf_file,genome,vcfwrite):
                             line[1] = str(POS)
                             fw.write('\t'.join(line))
 
+def GzTbi(vcfwrite):
+    vcfsort = os.popen('vcf-sort '+vcfwrite+' > '+vcfwrite[:-4]+'_sorted.vcf')
+    print(vcfsort.read())
+    bgzip = os.popen('bgzip -c '+vcfwrite[:-4]+'_sorted.vcf'+' > '+vcfwrite[:-4]+'_sorted.vcf.gz')
+    print(bgzip.read())
+    tabix = os.popen('tabix -p vcf '+vcfwrite[:-4]+'_sorted.vcf.gz')
+    print(tabix.read())
+
 if __name__ == "__main__":
     ref_genome = args.ref_fa
     vcf_file = args.in_vcf
     vcfwrite = args.out_vcf
+    add_chr = args.add_chr
+    add_header = args.add_header
+    gz_tbi = args.gz_tbi
     print("Vcf reformat start")
     t = time.time()
     genome = GetGenoSeq(ref_genome)
-    modify(vcf_file,genome,vcfwrite)
+    modify(vcf_file,genome,vcfwrite,add_chr,add_header)
+    if gz_tbi:
+        GzTbi(vcfwrite)
     print("Vcf reformat finished")
     print("Time used:",time.time()-t)
