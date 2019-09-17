@@ -17,7 +17,7 @@ def GetGoldSV(gzpath):
                         POS = int(line[1])
                         complex_gold[(CHROM,POS,line[3],line[4])]= TYPE
                 elif len(line[3])!=1 or len(line[4])!=1:
-                    if abs(len(line[3])-len(line[4]))<50:
+                    if abs(len(line[3])-len(line[4]))>=50:
                         CHROM = line[0]
                         POS = int(line[1])
                         simple_gold[(CHROM,POS,line[3],line[4])]= TYPE
@@ -30,7 +30,7 @@ def vcfdict_SV(vcf_file):
             if line[0] != '#':
                 line = line.split('\t')
                 if line[7] != "SVTYPE=SNP":
-                    if abs(len(line[3])-len(line[4]))<50:
+                    if abs(len(line[3])-len(line[4]))>=50:
                         #print(line)
                         CHROM = line[0]
                         POS = int(line[1])
@@ -76,10 +76,10 @@ def split_complex(complex_dic):
         pos = key[1]
         if not very_complex(ref,alt1,alt2):
             ref1,alt1 = split_value(ref,alt1)
-            if abs(len(ref1)-len(alt1)) <50:
+            if abs(len(ref1)-len(alt1)) >=50:
                 split_dic[(key[0],pos,ref1,alt1)] = 0
             ref2,alt2 = split_value(ref,alt2)
-            if abs(len(ref2)-len(alt2)) <50:
+            if abs(len(ref2)-len(alt2)) >=50:
                 split_dic[(key[0],pos,ref2,alt2)] = 0
     return split_dic
 
@@ -142,7 +142,7 @@ def Compare_SV(libdic,gold,gold_complex):
             time_data[value] += 1
         else:
             time_data[value] = 1
-    print("INDEL:")
+    print("SV:")
     print("\tOverlap",overlap,"\n\tFP",fp,"\n\tFN",fn)
     print("\tTotal gold:",len(gold)+len(split_comp),"\n\tTotal input vcf:",len(libdic))
     print("\tPrecision(overlap/input_vcf)",overlap/(overlap+fp))
