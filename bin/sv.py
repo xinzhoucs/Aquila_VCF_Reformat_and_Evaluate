@@ -1,6 +1,6 @@
 import gzip
 
-def GetGoldINDEL(gzpath):
+def GetGoldSV(gzpath):
     simple_gold = {}
     complex_gold = {}
     with gzip.open(gzpath,"rb") as f:
@@ -23,7 +23,7 @@ def GetGoldINDEL(gzpath):
                         simple_gold[(CHROM,POS,line[3],line[4])]= TYPE
     return simple_gold , complex_gold
 
-def vcfdict_INDEL(vcf_file):
+def vcfdict_SV(vcf_file):
     dic = {}
     with open(vcf_file,'r') as vcf:
         for line in vcf:
@@ -83,7 +83,7 @@ def split_complex(complex_dic):
                 split_dic[(key[0],pos,ref2,alt2)] = 0
     return split_dic
 
-def Compare_INDEL(libdic,gold,gold_complex):
+def Compare_SV(libdic,gold,gold_complex):
     #overlap = {}
     overlap = 0
     fn=0
