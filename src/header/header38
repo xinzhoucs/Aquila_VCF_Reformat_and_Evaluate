@@ -29,4 +29,4 @@
 ##commandline="Aquila/bin/Aquila_assembly_based_variants_call.py --assembly_dir Assembly_results_S12878 --out_dir Variants_results_S12878 --ref_file Aquila/source/ref.fa"
 ##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
 ##FORMAT=<ID=Contig,Number=1,Type=String,Description="Contig information">
-#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	S12878_lysis
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	Sample
