@@ -1,6 +1,7 @@
 from hc_common import GetBed,SplitHiconf
 from indel import GetGoldINDEL,Compare_INDEL,vcfdict_INDEL
 from snp import GetGoldSNP,Compare_SNP,vcfdict_SNP
+from sv import GetGoldSV,Compare_SV,vcfdict_SV
 from argparse import ArgumentParser
 import time
 
@@ -29,6 +30,13 @@ if __name__ == "__main__":
     INDEL_Gold_complex_HC = SplitHiconf(bed,INDEL_Gold_complex)
     Compare_INDEL(INDEL_vcf_HC,INDEL_Gold_simple_HC,INDEL_Gold_complex_HC)
     print("INDEL evaluation finished")
+    print("SV evaluation start")
+    SV_vcf_HC = SplitHiconf(bed,vcfdict_SV(vcf_file))
+    SV_Gold_simple,SV_Gold_complex = GetGoldSV(gold_file)
+    SV_Gold_simple_HC = SplitHiconf(bed,SV_Gold_simple)
+    SV_Gold_complex_HC = SplitHiconf(bed,SV_Gold_complex)
+    Compare_SV(SV_vcf_HC,SV_Gold_simple_HC,SV_Gold_complex_HC)
+    print("SV evaluation finished")
     print("All Done!")
     print("Total time:",time.time()-t)
         
