@@ -2,14 +2,14 @@
 ## Reformat:
 Reformat script modify the REF field, ALT field and POS field as follows:
 ```
-Changes from base 1 to base 0
+Changes from base 0 to base 1
 
 For INDEL:
 acg     -    =>     TACG        T
                       ^         ^
                lower to upper   add one reference base
 
-POS not changed (+1-1=0)
+POS not changed
 
 For SNP:
 lower to upper and POS+1
@@ -22,6 +22,10 @@ python Reformat.py -r ../source/genome.fa -i ../source/Aquila_final_sorted.vcf -
 #### --ref_fa REF_FA, -r REF_FA : Reference fasta file for reformat
 #### --in_vcf IN_VCF, -i IN_VCF : Original vcf file from Aquila
 #### --out_vcf OUT_VCF, -o OUT_VCF : Output reformated vcf file
+### *Optional parameters
+#### --add_header HEADER, -head HEADER : Add header to vcf (38,19 or none) default=none 
+#### --add_chr,-ac : If set, the script will add 'chr' to CHROM field (1->chr1)
+#### --gz_tbi,-gt : If set, the script will output gz and tbi file (requires htslib,tabix and vcftools package)
 
 ## Evaluate:
 ### Example:
@@ -29,10 +33,10 @@ python Reformat.py -r ../source/genome.fa -i ../source/Aquila_final_sorted.vcf -
 python Evaluation.py -b ../source/HG001_Gold.bed -g ../source/HG001_Gold.gz -v ../source/L2_stLFR_L3_10x.vcf
 ```
 ### *Required parameters
-#### --bed_hc BED_HC, -b BED_HC : Bed file which represents high confidence region
 #### --gold_gz GOLD_GZ, -g GOLD_GZ : Gold standard vcf file (gziped)
 #### --vcf_file VCF_FILE, -v VCF_FILE : Vcf file to be evaluated
-
+### *Optional parameters
+#### --bed_hc BED_HC, -b BED_HC : Bed file which represents high confidence region. default = none
 ### Output Example
 ```
 SNP evaluation start
@@ -76,6 +80,26 @@ INDEL:
 --------------------------------------------------------------------------
 
 INDEL evaluation finished
+SV evaluation start
+SV:
+        Overlap 9
+        FP 2716
+        FN 0
+        Total gold: 9
+        Total input vcf: 2725
+        Precision(overlap/input_vcf) 0.0033027522935779817
+        Recall(sensitivity,overlap/gold): 1.0
+----------------------------------
+        GenoType correct: 8
+        Hetero(Gold) -> Homo (input_vcf): 0
+        Homo(Gold) -> Hetero (input_vcf): 1
+        Total GenoType change: 1
+        GenoType error rate: 0.1111111111111111
+----------------------------------
+        Compound:
+--------------------------------------------------------------------------
+
+SV evaluation finished
 All Done!
-Total time: 82.49052119255066
+Total time: 108.1656060218811
 ```
