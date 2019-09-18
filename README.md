@@ -36,7 +36,7 @@ python Evaluation.py -b ../source/HG001_Gold.bed -g ../source/HG001_Gold.gz -v .
 #### --gold_gz GOLD_GZ, -g GOLD_GZ : Gold standard vcf file (gziped)
 #### --vcf_file VCF_FILE, -v VCF_FILE : Vcf file to be evaluated
 ### *Optional parameters
-#### --bed_hc BED_HC, -b BED_HC : Bed file which represents high confidence region. default = none
+#### --bed_hc BED_HC, -b BED_HC : Bed file which represents region you want to evaluate. default = none
 ### Output Example
 ```
 SNP evaluation start
