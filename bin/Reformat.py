@@ -11,6 +11,9 @@ parser.add_argument('--add_chr','-ac',help="Add 'chr' to CHROM field (1->chr1)",
 parser.add_argument('--gz_tbi','-gt',help="Output gz and tbi file",action="store_true")
 args = parser.parse_args()
 
+script_path = os.path.dirname(os.path.abspath( __file__ ))
+code_path = script_path + "/" 
+
 
 def GetGenoSeq (fafile):
     genome ={}
@@ -38,7 +41,7 @@ def modify(vcf_file,genome,vcfwrite,add_chr,add_header):
     with open (vcf_file, "r") as f:
         with open (vcfwrite,"w") as fw:
             if add_header != "none":
-                with open("../src/header/header"+add_header,"r") as fh:
+                with open(code_path+"header/header"+add_header,"r") as fh:
                     for line in fh:
                         fw.write(line)
             for line in f:
