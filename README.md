@@ -2,17 +2,17 @@
 ## Reformat:
 Reformat script modify the REF field, ALT field and POS field as follows:
 ```
-Changes from base 0 to base 1
+All Variants Changes from base 0 to base 1
 
-For INDEL:
+For INDEL/SV:
 acg     -    =>     TACG        T
                       ^         ^
                lower to upper   add one reference base
 
-POS not changed
-
 For SNP:
-lower to upper and POS+1
+a     t    =>     A        T
+                  ^        ^
+               lower to upper   
 ```
 ### Example:
 ```
