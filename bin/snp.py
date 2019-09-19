@@ -81,12 +81,27 @@ def Compare_SNP(libdic,gold):
     print("SNP:")
     print("\tOverlap",overlap,"\n\tFP",fp,"\n\tFN",fn)
     print("\tTotal gold:",len(gold),"\n\tTotal input vcf:",len(libdic))
-    print("\tPrecision(overlap/input_vcf)",overlap/(overlap+fp))
-    print("\tRecall(sensitivity,overlap/gold)",overlap/len(gold))
+    try:
+        overlap/(overlap+fp)
+    except ZeroDivisionError:
+        pass
+    else:
+        print("\tPrecision(overlap/input_vcf)",overlap/(overlap+fp))
+    try:
+        overlap/len(gold)
+    except ZeroDivisionError:
+        pass
+    else:
+        print("\tRecall(sensitivity,overlap/gold)",overlap/len(gold))
     print("----------------------------------")
     print("\tGenoType correct:",gtc)
     print("\tHetero(Gold) -> Homo (input_vcf):",he_ho)
     print("\tHomo(Gold) -> Hetero (input_vcf):",ho_he)
     print("\tTotal GenoType change:",he_ho+ho_he)
-    print("\tGenoType error rate:",(he_ho+ho_he)/overlap)
+    try:
+        (he_ho+ho_he)/overlap
+    except ZeroDivisionError:
+        pass
+    else:
+        print("\tGenoType error rate:",(he_ho+ho_he)/overlap)
     print("--------------------------------------------------------------------------\n")
