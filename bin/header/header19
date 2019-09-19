@@ -1,7 +1,7 @@
 ##fileformat=VCFv4.1
 ##fileDate=2019
 ##source=Aquila
-##reference=/oak/stanford/groups/arend/Xin/Software/refdata-hg19-2.1.0/fasta/genome.fa
+##reference=/refdata-hg19-2.1.0/fasta/genome.fa
 ##contig=<ID=chr1,length=249250621>
 ##contig=<ID=chr2,length=243199373>
 ##contig=<ID=chr3,length=198022430>
