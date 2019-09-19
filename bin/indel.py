@@ -9,7 +9,10 @@ def GetGoldINDEL(gzpath):
             if line[0] != '#':
                 line = line.split('\t')
                 TYPE = line[9].split(":")[0]
-                TYPE = int(TYPE[0])*int(TYPE[2])
+                if "." in TYPE:
+                    TYPE = 0
+                else:
+                    TYPE = int(TYPE[0])*int(TYPE[2])
                 if TYPE ==2:
                     alt1,alt2 = line[4].split(",")
                     if len(line[3])!=1 or len(alt1)!=1 or len(alt2)!=1:
