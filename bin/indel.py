@@ -148,14 +148,29 @@ def Compare_INDEL(libdic,gold,gold_complex):
     print("INDEL:")
     print("\tOverlap",overlap,"\n\tFP",fp,"\n\tFN",fn)
     print("\tTotal gold:",len(gold)+len(split_comp),"\n\tTotal input vcf:",len(libdic))
-    print("\tPrecision(overlap/input_vcf)",overlap/(overlap+fp))
-    print("\tRecall(sensitivity,overlap/gold):",overlap/(len(gold)+len(split_comp)))
+    try:
+        overlap/(overlap+fp)
+    except ZeroDivisionError:
+        pass
+    else:
+        print("\tPrecision(overlap/input_vcf)",overlap/(overlap+fp))
+    try:
+        overlap/(len(gold)+len(split_comp))
+    except ZeroDivisionError:
+        pass
+    else:
+        print("\tRecall(sensitivity,overlap/gold):",overlap/(len(gold)+len(split_comp)))
     print("----------------------------------")
     print("\tGenoType correct:",gtc)
     print("\tHetero(Gold) -> Homo (input_vcf):",he_ho)
     print("\tHomo(Gold) -> Hetero (input_vcf):",ho_he)
     print("\tTotal GenoType change:",he_ho+ho_he)
-    print("\tGenoType error rate:",(he_ho+ho_he)/overlap)
+    try:
+        (he_ho+ho_he)/overlap
+    except ZeroDivisionError:
+        pass
+    else:
+        print("\tGenoType error rate:",(he_ho+ho_he)/overlap)
     print("----------------------------------")
     print("\tCompound:")
     for key,value in time_data.items():
@@ -163,3 +178,5 @@ def Compare_INDEL(libdic,gold,gold_complex):
         
     #print("Total:",total,"Overlap:",comp_lap)
     print("--------------------------------------------------------------------------\n")
+    
+    
