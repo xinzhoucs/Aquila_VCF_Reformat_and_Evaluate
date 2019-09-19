@@ -9,6 +9,7 @@ parser.add_argument('--out_vcf','-o',help="Output reformated vcf file",required=
 parser.add_argument('--add_header','-head',help="Add header to vcf (38 or 19)",default=False)
 parser.add_argument('--add_chr','-ac',help="Add 'chr' to CHROM field (1->chr1)",action="store_true")
 parser.add_argument('--gz_tbi','-gt',help="Output gz and tbi file",action="store_true")
+parser.add_argument('--pos_base','-pb',help="If set, change base from 0 to 1 and add 1 base at the beginning of INDEL",action="store_true")
 args = parser.parse_args()
 
 script_path = os.path.dirname(os.path.abspath( __file__ ))
@@ -32,7 +33,7 @@ def GetGenoSeq (fafile):
         chro = []
     return genome
     
-def modify(vcf_file,genome,vcfwrite,add_chr,add_header):
+def modify(vcf_file,genome,vcfwrite,add_chr,add_header,pos_base):
     chrom_list = ['chr1','chr2','chr3','chr4','chr5',
                   'chr6','chr7','chr8','chr9','chr10',
                   'chr11','chr12','chr13','chr14','chr15',
@@ -58,17 +59,20 @@ def modify(vcf_file,genome,vcfwrite,add_chr,add_header):
                     line[4] = line[4].upper()
                     if CHROM in chrom_list:
                         if INFO == 'SVTYPE=SNP':
-                            line[1] = str(POS+1)
+                            if pos_base:
+                                line[1] = str(POS+1)
                             fw.write('\t'.join(line))
                         elif INFO == 'SVTYPE=DEL':
-                            line[3] = genome[CHROM][POS-1].upper() + line[3]
-                            line[4] = genome[CHROM][POS-1].upper()
-                            line[1] = str(POS)
+                            if pos_base:
+                                line[3] = genome[CHROM][POS-1].upper() + line[3]
+                                line[4] = genome[CHROM][POS-1].upper()
+                                line[1] = str(POS)
                             fw.write('\t'.join(line))
                         else:#INFO == 'VTYPE=INS'
-                            line[3] = genome[CHROM][POS-1].upper()
-                            line[4] = genome[CHROM][POS-1].upper() + line[4]
-                            line[1] = str(POS)
+                            if pos_base:
+                                line[3] = genome[CHROM][POS-1].upper()
+                                line[4] = genome[CHROM][POS-1].upper() + line[4]
+                                line[1] = str(POS)
                             fw.write('\t'.join(line))
 
 def GzTbi(vcfwrite):
@@ -86,10 +90,11 @@ if __name__ == "__main__":
     add_chr = args.add_chr
     add_header = args.add_header
     gz_tbi = args.gz_tbi
+    pos_base = args.pos_base
     print("Vcf reformat start")
     t = time.time()
     genome = GetGenoSeq(ref_genome)
-    modify(vcf_file,genome,vcfwrite,add_chr,add_header)
+    modify(vcf_file,genome,vcfwrite,add_chr,add_header,pos_base)
     if gz_tbi:
         GzTbi(vcfwrite)
     print("Vcf reformat finished")
