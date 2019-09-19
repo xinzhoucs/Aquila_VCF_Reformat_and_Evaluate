@@ -9,7 +9,7 @@ parser.add_argument('--out_vcf','-o',help="Output reformated vcf file",required=
 parser.add_argument('--add_header','-head',help="Add header to vcf (38 or 19)",default=False)
 parser.add_argument('--add_chr','-ac',help="Add 'chr' to CHROM field (1->chr1)",action="store_true")
 parser.add_argument('--gz_tbi','-gt',help="Output gz and tbi file",action="store_true")
-parser.add_argument('--pos_base','-pb',help="If set, change base from 0 to 1 and add 1 base at the beginning of INDEL",action="store_true")
+parser.add_argument('--base_norm','-bn',help="If set, change base from 0 to 1 (for all types of variants) and add 1 base at the beginning of INDEL and SV.",action="store_true")
 args = parser.parse_args()
 
 script_path = os.path.dirname(os.path.abspath( __file__ ))
@@ -90,7 +90,7 @@ if __name__ == "__main__":
     add_chr = args.add_chr
     add_header = args.add_header
     gz_tbi = args.gz_tbi
-    pos_base = args.pos_base
+    pos_base = args.base_norm
     print("Vcf reformat start")
     t = time.time()
     genome = GetGenoSeq(ref_genome)
