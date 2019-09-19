@@ -16,7 +16,7 @@ a     t    =>     A        T
 ```
 ### Example:
 ```
-python Reformat.py -r ../source/genome.fa -i ../source/Aquila_final_sorted.vcf -o ../source/Aquila_Reformated.vcf 
+python Reformat.py -r ./source/genome.fa -i /PATH/TO/Aquila_final_sorted.vcf -o Aquila_Reformated.vcf 
 ```
 ### *Required parameters
 #### --ref_fa REF_FA, -r REF_FA : Reference fasta file for reformat
