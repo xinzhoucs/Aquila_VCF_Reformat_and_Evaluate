@@ -35,7 +35,7 @@ python Reformat.py -r ./source/genome.fa -i /PATH/TO/Aquila_final_sorted.vcf -o 
 ### Evaluate SNP/INDEL/SV calling with GiaB gold standards
 ### Example:
 ```
-python Evaluation.py -b ../source/HG001_Gold.bed -g ../source/HG001_Gold.gz -v ../source/L2_stLFR_L3_10x.vcf
+python Evaluation.py -b /PATH/TO/HG001_Gold.bed -g /PATH/TO/HG001_Gold.gz -v Aquila_Reformated.vcf --file_out_dir eval_results --snp_eval --indel_eval
 ```
 ### *Required parameters
 #### --gold_gz GOLD_GZ, -g GOLD_GZ : Gold standard vcf file (gziped)
