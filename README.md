@@ -19,7 +19,7 @@ a     t    =>     A        T
 ```
 ### Example:
 ```
-python Reformat.py -r ./source/genome.fa -i /PATH/TO/Aquila_final_sorted.vcf -o Aquila_Reformated.vcf --add_header 38 --gz_tbi
+python Reformat.py -r ./source/genome.fa -i /PATH/TO/Aquila_final_sorted.vcf -o Aquila_Reformated.vcf --add_header 38 --base_norm --gz_tbi
 ```
 ### *Required parameters
 #### --ref_fa REF_FA, -r REF_FA : Reference fasta file for reformat
