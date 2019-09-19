@@ -26,7 +26,7 @@ python Reformat.py -r ./source/genome.fa -i /PATH/TO/Aquila_final_sorted.vcf -o 
 #### --add_header HEADER, -head HEADER : Add header to vcf (38,19 or none) default=False
 #### --add_chr,-ac : If set, the script will add 'chr' to CHROM field (1->chr1)
 #### --gz_tbi,-gt : If set, the script will output gz and tbi file (requires htslib,tabix and vcftools package)
-#### --base_norm,-pb : If set, change base from 0 to 1 (for all types of variants) and add 1 base at the beginning of INDEL and SV. 
+#### --base_norm,-bn : If set, change base from 0 to 1 (for all types of variants) and add 1 base at the beginning of INDEL and SV. 
 
 ## Evaluate:
 ### Example:
