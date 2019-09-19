@@ -1,3 +1,12 @@
+import tarfile
+import os
+from argparse import ArgumentParser
+
+parser = ArgumentParser(description="Author: xzhou15@cs.stanford.edu\n liuyichen@std.uestc.edu.cn\n",usage='use "python3 %(prog)s --help" for more information')
+parser.add_argument('--input','-i',help="Input fp,fn of tp result txt",required = True)
+parser.add_argument('--output','-o',help="Output file",required=True)
+args = parser.parse_args()
+
 def takeFirst(elem):
     return elem[0]
     
@@ -94,19 +103,14 @@ def TRgt100(txt,TRmask,TR100txt):
                         else:
                             fw.write(line.replace("\n","\tnoTRgt100\n"))
 
-
-
-
-
-def Mask_process():#generate and filter
-    with open("/oak/stanford/groups/arend/Xin/AssemblyProj/reference_align_2/Repeats_mask/allrepeats_byxin.bed","r") as fr:
-            with open("/oak/stanford/groups/arend/Xin/LiuYC/Truvari_test/TRmask.bed","w") as fw:
-                for line in fr:
-                    if line[0]!="#":
-                        line = line.split("\t")
-                        CHROM = line[5]
-                        start = int(line[6])
-                        end = int(line[7])
-                        lenth = end-start+1
-                        if lenth >= 100:
-                            fw.write("%s\t%s\t%s\n"%(CHROM,start,end))
+if __name__ == "__main__":
+    txt = args.input
+    TR100txt = args.output
+    script_path = os.path.dirname(os.path.abspath( __file__ ))
+    code_path = script_path + "/" 
+    if not os.path.exists(code_path+"TRmask.bed"):
+        trmask = tarfile.open(code_path+"TRmask.bed.tar.gz","r")
+        for ti in trmask:
+            trmask.extract(ti,code_path)
+        trmask.close()
+    TRgt100(txt,code_path+"TRmask.bed",TR100txt)
