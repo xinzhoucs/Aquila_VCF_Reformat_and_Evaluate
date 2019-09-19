@@ -1,6 +1,6 @@
 # Vcf Reformat and Evaluate
 ## Reformat: 
-#### Reformat VCF files from Aquila to do variants calling evaluation (by Evaluation.py or RTGtools/hap.py) 
+### Reformat VCF files from Aquila to do variants calling evaluation (by Evaluation.py or RTGtools/hap.py) 
 Reformat script modify the REF field, ALT field and POS field as follows:
 ```
 All Variants Changes from base 0 to base 1 (optional with flag "--base_norm")
@@ -32,7 +32,7 @@ python Reformat.py -r ./source/genome.fa -i /PATH/TO/Aquila_final_sorted.vcf -o 
 #### --base_norm,-bn : If set, change base from 0 to 1 (for all types of variants) and add 1 base at the beginning for both REF and ALT fields of INDEL/SV (see above schematic diagram). default=False 
 
 ## Evaluate:
-#### Evaluate SNP/INDEL/SV calling with GiaB gold standards
+### Evaluate SNP/INDEL/SV calling with GiaB gold standards
 ### Example:
 ```
 python Evaluation.py -b ../source/HG001_Gold.bed -g ../source/HG001_Gold.gz -v ../source/L2_stLFR_L3_10x.vcf
@@ -114,6 +114,7 @@ Total time: 108.1656060218811
 ```
 
 ## TRgt100 Annotation
+### TRgt100: 
 ### Example
 ```
 python Annotation_TR.py -i INDEL_fp.txt -o INDEL_fp_TR.txt
