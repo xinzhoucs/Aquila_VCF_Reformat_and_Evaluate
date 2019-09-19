@@ -23,9 +23,10 @@ python Reformat.py -r ./source/genome.fa -i /PATH/TO/Aquila_final_sorted.vcf -o 
 #### --in_vcf IN_VCF, -i IN_VCF : Original vcf file from Aquila
 #### --out_vcf OUT_VCF, -o OUT_VCF : Output reformated vcf file
 ### *Optional parameters
-#### --add_header HEADER, -head HEADER : Add header to vcf (38,19 or none) default=none 
+#### --add_header HEADER, -head HEADER : Add header to vcf (38,19 or none) default=False
 #### --add_chr,-ac : If set, the script will add 'chr' to CHROM field (1->chr1)
 #### --gz_tbi,-gt : If set, the script will output gz and tbi file (requires htslib,tabix and vcftools package)
+#### --pos_base,-pb : If set, change base from 0 to 1 and add 1 base at the beginning of INDEL
 
 ## Evaluate:
 ### Example:
@@ -36,7 +37,11 @@ python Evaluation.py -b ../source/HG001_Gold.bed -g ../source/HG001_Gold.gz -v .
 #### --gold_gz GOLD_GZ, -g GOLD_GZ : Gold standard vcf file (gziped)
 #### --vcf_file VCF_FILE, -v VCF_FILE : Vcf file to be evaluated
 ### *Optional parameters
-#### --bed_hc BED_HC, -b BED_HC : Bed file which represents region you want to evaluate. default = none
+#### --bed_hc BED_HC, -b BED_HC : Bed file which represents region you want to evaluate. default = False
+#### --file_out_dir DIR, -o DIR : If set, evaluate resilts will be output to the specified dir. default = False
+#### --snp_eval,-snp : If set, evaluate SNP in input vcf file (if none of snp,sv,indel flag is set, ALL of them will be evaluated)
+#### --sv_eval,-sv : If set, evaluate SV in input vcf file (if none of snp,sv,indel flag is set, ALL of them will be evaluated)
+#### --indel_eval,-indel : If set, evaluate INDEL in input vcf file (if none of snp,sv,indel flag is set, ALL of them will be evaluated)
 ### Output Example
 ```
 SNP evaluation start
@@ -103,3 +108,12 @@ SV evaluation finished
 All Done!
 Total time: 108.1656060218811
 ```
+
+## TRgt100 Annotation
+### Example
+```
+python Annotation_TR.py -i INDEL_fp.txt -o INDEL_fp_TR.txt
+```
+### *Required parameters
+#### --input FILE, -i FILE : Input fp,fn of tp result txt
+#### --output FILE, -o FILE : Output file
