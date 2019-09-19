@@ -1,5 +1,5 @@
 # Vcf Reformat and Evaluate
-## Reformat:
+## Reformat: Reformat VCF files from Aquila to do variants calling evaluation (by Evaluation.py or RTGtools/hap.py) 
 Reformat script modify the REF field, ALT field and POS field as follows:
 ```
 All Variants Changes from base 0 to base 1 (optional with flag "--base_norm")
