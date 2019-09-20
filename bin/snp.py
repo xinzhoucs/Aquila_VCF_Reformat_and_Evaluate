@@ -110,6 +110,12 @@ def Compare_SNP(libdic,gold,out_dir):
         pass
     else:
         print("\tRecall(sensitivity,overlap/gold)",overlap/len(gold))
+    try:
+        2*(overlap/(overlap+fp))*(overlap/len(gold))/((overlap/(overlap+fp))+(overlap/len(gold)))
+    except ZeroDivisionError:
+        pass
+    else:
+        print("\tF1:",2*(overlap/(overlap+fp))*(overlap/len(gold))/((overlap/(overlap+fp))+(overlap/len(gold))))
     print("----------------------------------")
     print("\tGenoType correct:",gtc)
     print("\tHetero(Gold) -> Homo (input_vcf):",he_ho)
