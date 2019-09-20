@@ -184,6 +184,12 @@ def Compare_INDEL(libdic,gold,gold_complex,out_dir):
         pass
     else:
         print("\tRecall(sensitivity,overlap/gold):",overlap/(len(gold)+len(split_comp)))
+    try:
+        2*(overlap/(overlap+fp))*(overlap/(len(gold)+len(split_comp)))/((overlap/(overlap+fp))+(overlap/(len(gold)+len(split_comp))))
+    except ZeroDivisionError:
+        pass
+    else:
+        print("\tF1:",2*(overlap/(overlap+fp))*(overlap/(len(gold)+len(split_comp)))/((overlap/(overlap+fp))+(overlap/(len(gold)+len(split_comp)))))
     print("----------------------------------")
     print("\tGenoType correct:",gtc)
     print("\tHetero(Gold) -> Homo (input_vcf):",he_ho)
