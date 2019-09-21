@@ -25,7 +25,7 @@ if __name__ == "__main__":
     snp_flag = args.snp_eval
     indel_flag = args.indel_eval
     sv_flag = args.sv_eval
-    all_flag = not (snp_flag or sv_flag or snp_flag)
+    all_flag = not (indel_flag or sv_flag or snp_flag)
 
     t = time.time()
     if bed_file:
