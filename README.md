@@ -42,7 +42,7 @@ python Evaluation.py -b /PATH/TO/HG001_Gold.bed -g /PATH/TO/HG001_Gold.gz -v Aqu
 #### --vcf_file VCF_FILE, -v VCF_FILE : Vcf file to be evaluated
 ### *Optional parameters
 #### --bed_hc BED_HC, -b BED_HC : Bed file which represents region you want to evaluate. default = False
-#### --file_out_dir DIR, -o DIR : If set, evaluate resilts (snp_tp.txt, snp_fp.txt, snp_fn.txt, and etc) will be outputed to the specified dir. default = False
+#### --file_out_dir DIR, -o DIR : If set, evaluate results (snp_tp.txt, snp_fp.txt, snp_fn.txt, and etc) will be outputed to the specified dir. default = False
 #### --snp_eval,-snp : If set, evaluate SNP in input vcf file (if none of snp,sv,indel flag is set, ALL of them will be evaluated)
 #### --sv_eval,-sv : If set, evaluate SV in input vcf file (if none of snp,sv,indel flag is set, ALL of them will be evaluated)
 #### --indel_eval,-indel : If set, evaluate INDEL in input vcf file (if none of snp,sv,indel flag is set, ALL of them will be evaluated)
