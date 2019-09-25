@@ -101,6 +101,7 @@ def TRgt100(vcf,TRmask,outdir):
 if __name__ == "__main__":
     vcf = args.input
     outdir = args.output
+    outdir = outdir + "/"
     if not os.path.exists(outdir):
         os.mkdir(outdir)
     script_path = os.path.dirname(os.path.abspath( __file__ ))
