@@ -122,3 +122,12 @@ python Annotation_TR.py -i INDEL_fp.txt -o INDEL_fp_TR.txt
 ### *Required parameters
 #### --input FILE, -i FILE : Input file is the output by "Evaluation.py". 
 #### --output FILE, -o FILE : Output file with one more field (TRgt100 Annotation). 
+
+### TRgt100 for Truvari: 
+### Example
+```
+python Annotation_TR_Truvari.py -i INDEL_fp.vcf -o output/fp_TR100_annotatioon/
+```
+### *Required parameters
+#### --input FILE, -i FILE : vcf file to be annotated. 
+#### --output DIR, -o DIR : the dir to where the annotation results will be outputed    
